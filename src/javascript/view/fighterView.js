@@ -11,14 +11,15 @@ class FighterView extends View {
     const { name, source } = fighter;
     const nameElement = this.createName(name);
     const imageElement = this.createImage(source);
+    const selectBtn = this.createSelectBtn();
 
-    this.element = this.createElement({ tagName: 'div', className: 'fighter' });
-    this.element.append(imageElement, nameElement);
+    this.element = this.createElement({ tagName: 'div', classNames: ['fighter'] });
+    this.element.append(imageElement, nameElement, selectBtn);
     this.element.addEventListener('click', event => handleClick(event, fighter), false);
   }
 
   createName(name) {
-    const nameElement = this.createElement({ tagName: 'span', className: 'name' });
+    const nameElement = this.createElement({ tagName: 'span', classNames: ['name'] });
     nameElement.innerText = name;
 
     return nameElement;
@@ -26,14 +27,26 @@ class FighterView extends View {
 
   createImage(source) {
     const attributes = { src: source };
-    const imgElement = this.createElement({
+    return this.createElement({
       tagName: 'img',
-      className: 'fighter-image',
+      classNames: ['fighter-image'],
       attributes
     });
-
-    return imgElement;
   }
+
+  createSelectBtn() {
+    const selectBtn = this.createElement({
+      tagName: 'button',
+      classNames: ['btn', 'btn-warning'],
+    attributes: {
+        type: 'button'
+    }
+    });
+    selectBtn.innerText = 'Select';
+
+    return selectBtn;
+  }
+
 }
 
 export default FighterView;
