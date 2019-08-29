@@ -62,3 +62,25 @@ body {
 .modal {
     display: block;
 }
+
+.selected {
+    background-color: aqua;
+    border-color: aqua;
+}
+
+.selected:focus {
+    box-shadow: 0 0 0 0.2rem aqua;
+    background-color: aqua;
+    border-color: aqua;
+}
+
+.start-fight-wrapper {
+    display: flex;
+    margin-top: -140px;
+    width: 100%;
+    justify-content: center;
+}
+
+.start-fight-btn {
+
+}
