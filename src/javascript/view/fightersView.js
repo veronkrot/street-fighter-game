@@ -22,7 +22,7 @@ class FightersView extends View {
     constructor(fighters) {
         super();
 
-        this.handleClick = this.handleFighterClick.bind(this);
+        this.handleFighterClick = this.handleFighterClick.bind(this);
         this.createFighters(fighters);
     }
 
@@ -30,7 +30,7 @@ class FightersView extends View {
 
     createFighters(fighters) {
         const fighterElements = fighters.map(fighter => {
-            const fighterView = new FighterView(fighter, this.handleClick);
+            const fighterView = new FighterView(fighter, this.handleFighterClick);
             return fighterView.element;
         });
 
