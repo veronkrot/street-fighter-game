@@ -73,3 +73,14 @@ body {
     background-color: aqua;
     border-color: aqua;
 }
+
+.start-fight-wrapper {
+    display: flex;
+    margin-top: -140px;
+    width: 100%;
+    justify-content: center;
+}
+
+.start-fight-btn {
+
+}

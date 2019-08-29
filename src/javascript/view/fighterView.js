@@ -65,6 +65,10 @@ class FighterView extends View {
                 }
             }
 
+            if (!wasUnselected && fightHolder.hasAllFighters()) {
+                return;
+            }
+
             if (wasUnselected) {
                 selectBtn.classList.remove('selected');
                 const startBtn = document.querySelector('.start-fight-btn');
