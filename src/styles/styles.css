@@ -19,7 +19,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex: 1;
     flex-wrap: wrap;
     padding: 0 15px;
 }
@@ -76,11 +75,66 @@ body {
 
 .start-fight-wrapper {
     display: flex;
-    margin-top: -140px;
     width: 100%;
     justify-content: center;
 }
 
-.start-fight-btn {
+.second-fighter-col .fighter > img.fighter-image-fight {
+    transform: scaleX(-1);
+}
 
+.fighter-image-fight {
+    width: 75%;
+    height: 350px;
+    align-self: center;
+}
+
+.fighter-name {
+    align-self: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.strike-btn {
+    position: absolute;
+    top: 50%;
+    left: 40%;
+}
+
+.select {
+    width: 120px;
+    align-self: center;
+}
+
+.exit-battle-btn {
+    position: absolute;
+    left: 37%
+}
+
+.progress {
+    width: 60%;
+}
+
+.winner {
+    height: 260px;
+    width: 50%;
+    margin: auto;
+}
+
+.modal-header .close {
+    padding: 0;
+    margin: 0;
+}
+
+.modal-title {
+    margin: auto;
+}
+
+.progress-bar-2 {
+    display: flex;
+    float: right;
+}
+
+.modal {
+    margin-top: 10%;
 }

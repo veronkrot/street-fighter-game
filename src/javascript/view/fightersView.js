@@ -1,7 +1,7 @@
 import View from './view';
 import FighterView from './fighterView';
-import {fighterService} from '../services/fightersService';
-import FighterDetailsModal from './fighterDetailsModal';
+import FighterDetailsModal from './modal/fighterDetailsModal';
+import {fightersCache} from "../services/fightersCache";
 
 export const validations = {
     'attack': {
@@ -26,8 +26,6 @@ class FightersView extends View {
         this.createFighters(fighters);
     }
 
-    fightersDetailsMap = new Map();
-
     createFighters(fighters) {
         const fighterElements = fighters.map(fighter => {
             const fighterView = new FighterView(fighter, this.handleFighterClick);
@@ -39,10 +37,11 @@ class FightersView extends View {
     }
 
     showFighterDetails(fighter) {
-        const modal = document.querySelector('#modal');
+        const modal = document.querySelector('#fighter-details-modal');
 
-        const closeFunc = () => {
-            modal.innerText = '';
+        const closeFunc = (e) => {
+            e.preventDefault();
+            modal.innerHTML = '';
         };
 
         const saveFunc = (e) => {
@@ -79,7 +78,7 @@ class FightersView extends View {
                 validationFeedback(isValidProp, propName);
             }
             if (totalValidations === validProps) {
-                closeFunc();
+                closeFunc(e);
             }
         };
 
@@ -90,18 +89,9 @@ class FightersView extends View {
 
     handleFighterClick(event, fighter) {
         const id = fighter._id;
-        if (this.fightersDetailsMap.has(id)) {
-            console.log('Getting fighter from CACHE');
-            const fighterDetails = this.fightersDetailsMap.get(id);
-            this.showFighterDetails(fighterDetails);
-        } else {
-            console.log('Getting fighter from API');
-            const fighterPromise = fighterService.getFighterDetails(fighter._id);
-            fighterPromise.then((fighter) => {
-                this.fightersDetailsMap.set(id, fighter);
-                this.showFighterDetails(fighter);
-            });
-        }
+        fightersCache.retrieveDetails(id).then(fighter => {
+            this.showFighterDetails(fighter);
+        });
     }
 }
 

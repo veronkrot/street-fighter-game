@@ -1,6 +1,7 @@
 import View from './view';
 import StartFightBtn from './startFightBtn';
 import {fightHolder} from "../services/fightHolder";
+import {fightersCache} from "../services/fightersCache";
 
 class FighterView extends View {
     constructor(fighter, handleClick) {
@@ -39,7 +40,7 @@ class FighterView extends View {
     createSelectBtn(fighter) {
         const selectBtn = this.createElement({
             tagName: 'button',
-            classNames: ['btn', 'btn-warning'],
+            classNames: ['btn', 'btn-warning', 'select'],
             attributes: {
                 type: 'button'
             }
@@ -48,7 +49,6 @@ class FighterView extends View {
         const selectFighter = (event) => {
             event.preventDefault();
             event.stopPropagation();
-            let wasSelected = false;
             let wasUnselected = false;
 
             if (fightHolder.hasFighter1()) {
@@ -78,13 +78,21 @@ class FighterView extends View {
                 return;
             }
 
-            if (!fightHolder.hasFighter1()) {
-                fightHolder.fighter1 = fighter;
-                wasSelected = true;
-            } else if (!fightHolder.hasFighter2()) {
-                fightHolder.fighter2 = fighter;
-                wasSelected = true;
-            }
+            const selectFighter = (propName, funcName) => {
+                let wasSelected = false;
+                if (!fightHolder[funcName]()) {
+                    fightersCache.retrieveDetails(fighter._id).then(fighterDetails => {
+                        fightHolder[propName] = fighterDetails;
+                        if (fightHolder.hasAllFighters()) {
+                            return new StartFightBtn();
+                        }
+                    });
+                    wasSelected = true;
+                }
+                return wasSelected;
+            };
+            const wasSelected = selectFighter('fighter1', 'hasFighter1') || selectFighter('fighter2', 'hasFighter2');
+
             if (wasSelected) {
                 selectBtn.classList.add('selected');
             }
@@ -92,8 +100,10 @@ class FighterView extends View {
             if (fightHolder.hasAllFighters()) {
                 return new StartFightBtn();
             }
+
         };
         selectBtn.addEventListener('click', selectFighter);
+
         return selectBtn;
     }
 

@@ -1,5 +1,5 @@
 import View from './view';
-import BattleView from "./battleView";
+import BattleView from "./battle/battleView";
 
 class StartFightBtn extends View {
     constructor() {
@@ -26,10 +26,13 @@ class StartFightBtn extends View {
         fighters.append(startFightWrapper);
 
         const startBattle = () => {
-           fighters.style.display = 'none';
-           return new BattleView();
+            fighters.style.display = 'none';
+            document.querySelectorAll('.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            document.querySelector('.start-fight-btn').remove();
+            return new BattleView();
         };
-
         startFight.addEventListener('click', startBattle)
     }
 }
