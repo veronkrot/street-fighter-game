@@ -2,21 +2,12 @@ import View from './view';
 import FighterView from './fighterView';
 import FighterDetailsModal from './modal/fighterDetailsModal';
 import {fightersCache} from "../services/fightersCache";
+import NavBar from "./navBarView";
+import AddFighterBtn from "./addFighterBtn";
+import {validation} from "../services/validationService";
+import {validationRules} from "../services/validationService";
 
-export const validations = {
-    'attack': {
-        min: 2,
-        max: 10,
-        errorMsg: 'Attack should be a number [2 , 10]!',
-        elSelector: '#fighter-attack'
-    },
-    'health': {
-        min: 30,
-        max: 80,
-        errorMsg: 'Health should be a number [30 , 80]!',
-        elSelector: '#fighter-health'
-    }
-};
+const IGNORED_VALIDATION_FIELDS = ['_id', 'source', 'name', 'defense', 'currentHealth'];
 
 class FightersView extends View {
     constructor(fighters) {
@@ -24,6 +15,16 @@ class FightersView extends View {
 
         this.handleFighterClick = this.handleFighterClick.bind(this);
         this.createFighters(fighters);
+        this.createNavBar();
+        this.createAddFighterBtn();
+    }
+
+    createNavBar() {
+        return new NavBar();
+    }
+
+    createAddFighterBtn() {
+        return  new AddFighterBtn();
     }
 
     createFighters(fighters) {
@@ -47,35 +48,22 @@ class FightersView extends View {
         const saveFunc = (e) => {
             e.preventDefault();
 
-            const attrValidation = (inputValue, minValue, maxValue) => {
-                return (typeof inputValue === 'number') && (inputValue >= minValue) && (inputValue <= maxValue);
-            };
-
-            const validationFeedback = (isValid, propName) => {
-                const validFeedback = document.querySelector(`.${propName}.valid-feedback`);
-                const invalidFeedback = document.querySelector(`.${propName}.invalid-feedback`);
-                if (isValid) {
-                    validFeedback.style.display = 'block';
-                    invalidFeedback.style.display = 'none';
-                } else {
-                    invalidFeedback.style.display = 'block';
-                    validFeedback.style.display = 'none';
-                }
-            };
-
             let totalValidations = 0;
             let validProps = 0;
-            for (let propName in validations) {
+            for (let propName in validationRules) {
+                if(IGNORED_VALIDATION_FIELDS.includes(propName)){
+                    continue;
+                }
                 totalValidations++;
-                const propValidation = validations[propName];
+                const propValidation = validationRules[propName];
                 const el = document.querySelector(propValidation.elSelector);
                 const elVal = parseInt(el.value);
-                const isValidProp = attrValidation(elVal, propValidation.min, propValidation.max);
+                const isValidProp = validation.attrNumValidation(elVal, propValidation.min, propValidation.max);
                 if (isValidProp) {
                     fighter[propName] = elVal;
                     validProps++;
                 }
-                validationFeedback(isValidProp, propName);
+                validation.validationFeedback(isValidProp, propName);
             }
             if (totalValidations === validProps) {
                 closeFunc(e);

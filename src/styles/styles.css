@@ -1,9 +1,9 @@
 html,
 body {
-    height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
+    background-color: darkcyan;
 }
 
 #root {
@@ -13,6 +13,7 @@ body {
     justify-content: center;
     height: 100%;
     width: 100%;
+    margin-top: 5%;
 }
 
 .fighters {
@@ -21,6 +22,9 @@ body {
     align-items: center;
     flex-wrap: wrap;
     padding: 0 15px;
+    width: 1400px;
+    position: absolute;
+    top: 10%;
 }
 
 .fighter {
@@ -34,10 +38,11 @@ body {
     cursor: pointer;
 }
 
-.name {
+.fighter_name {
     align-self: center;
     font-size: 21px;
     margin-top: 20px;
+    color: aliceblue;
 }
 
 .fighter-image {
@@ -93,6 +98,7 @@ body {
     align-self: center;
     font-size: 24px;
     margin-bottom: 20px;
+    color: aliceblue;
 }
 
 .strike-btn {
@@ -108,11 +114,13 @@ body {
 
 .exit-battle-btn {
     position: absolute;
-    left: 37%
+    left: 37%;
+    margin-top: -25px;
 }
 
 .progress {
-    width: 60%;
+    width: 65%;
+    background-color: darkcyan;
 }
 
 .winner {
@@ -136,5 +144,10 @@ body {
 }
 
 .modal {
-    margin-top: 10%;
+    margin-top: 5%;
+}
+
+.invalid-feedback,
+.valid-feedback {
+    margin-top: -0.75rem;
 }

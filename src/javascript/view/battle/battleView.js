@@ -67,7 +67,7 @@ class BattleView extends View {
 
         const strikeBtn = this.createElement({
             tagName: 'button',
-            classNames: ['btn', 'btn-info', 'strike-btn'],
+            classNames: ['btn', 'btn-warning', 'strike-btn'],
             attributes: {
                 type: 'button'
             }
@@ -83,7 +83,7 @@ class BattleView extends View {
 
         const exitBattleBtn = this.createElement({
             tagName: 'button',
-            classNames: ['btn', 'btn-outline-danger', 'exit-battle-btn'],
+            classNames: ['btn', 'btn-danger', 'exit-battle-btn'],
             attributes: {
                 type: 'button'
             }
