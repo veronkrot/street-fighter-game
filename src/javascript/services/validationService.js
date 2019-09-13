@@ -30,23 +30,24 @@ export const validationRules = {
     }
 };
 
+const pattern = new RegExp('^(https?:\\/\\/)?' +
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' +
+    '((\\d{1,3}\\.){3}\\d{1,3}))' +
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
+    '(\\?[;&a-z\\d%_.~+=-]*)?' +
+    '(\\#[-a-z\\d_]*)?$', 'i');
+
 class Validation {
 
     attrNumValidation(inputValue, minValue, maxValue) {
-            return (typeof inputValue === 'number') && (inputValue >= minValue) && (inputValue <= maxValue);
-        }
+        return (typeof inputValue === 'number') && (inputValue >= minValue) && (inputValue <= maxValue);
+    }
 
     attrNameValidation(inputValue, minLength, maxLength) {
         return (typeof inputValue === 'string') && (inputValue.length >= minLength) && (inputValue.length <= maxLength);
     }
 
     attrSourceValidation(inputValue) {
-        var pattern = new RegExp('^(https?:\\/\\/)?'+
-            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+
-            '((\\d{1,3}\\.){3}\\d{1,3}))'+
-            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+
-            '(\\?[;&a-z\\d%_.~+=-]*)?'+
-            '(\\#[-a-z\\d_]*)?$','i');
         return !!pattern.test(inputValue);
     }
 
