@@ -13,7 +13,7 @@ export const fight = (fighter1, fighter2) => {
         const winnerModal = document.querySelector('#winner-modal');
 
         const closeFunc = () => {
-            winnerModal.innerText = '';
+            winnerModal.innerHTML = '';
             const fighters = document.querySelector('.fighters');
             fightHolder.fighter1 = undefined;
             fightHolder.fighter2 = undefined;

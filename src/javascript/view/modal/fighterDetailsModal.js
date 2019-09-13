@@ -1,5 +1,6 @@
-import {validations} from "../fightersView";
+import {validationRules} from "../../services/validationService";
 import GenericModal from "./genericModal";
+import {modalUtils} from './modalUtils';
 
 const IGNORED_FIELDS = ['_id', 'source', 'name', 'currentHealth'];
 const READONLY_FIELDS = ['defense'];
@@ -12,57 +13,24 @@ class FighterDetailsModal extends GenericModal {
         const buttons = [];
         buttons.push(this.createSaveBtn());
         buttons.push(this.createCloseBtn(closeBtnHandler));
-        super.createDialog(this.createModalBody(), fighter.name, buttons, closeBtnHandler);
+        super.createDialog(this.modalBody(), fighter.name, buttons, closeBtnHandler);
     }
 
-    createModalBody() {
-        const modalBody = this.createElement({
-            tagName: 'div',
-            classNames: ['modal-body'],
-        });
+    modalBody() {
+        const modalBody = modalUtils.createModalBody();
         const createFighterAttributes = (propName, value) => {
-
-            const inputGroup = this.createElement({
-                tagName: 'div',
-                classNames: ['input-group', 'mb-3']
-            });
-            const inputGroupPrepend = this.createElement({
-                tagName: 'div',
-                classNames: ['input-group-prepend', 'form-group']
-            });
-            const attributeName = this.createElement({
-                tagName: 'span',
-                classNames: ['input-group-text'],
-                attributes: {
-                    id: 'inputGroup-sizing-default'
-                }
-            });
+            const inputGroup = modalUtils.createInputGroup();
+            const inputGroupPrepend = modalUtils.createInputGroupPrepend();
+            const attributeName = modalUtils.createAttributeName();
             attributeName.innerText = propName;
+            const inputAttributeValue = modalUtils.createInputAttributeValue(propName);
 
-            let id = `fighter-${propName}`;
-            const inputAttributeValue = this.createElement({
-                tagName: 'input',
-                classNames: ['form-control'],
-                attributes: {
-                    type: 'number',
-                    id: id
-                }
-            });
+            const validFeedback = modalUtils.createValidFeedback(propName);
 
-            const validFeedback = this.createElement({
-                tagName: 'div',
-                classNames: [propName, 'valid-feedback']
-            });
-            validFeedback.innerText = 'Looks good!';
-            validFeedback.style.display = 'none';
+            const invalidFeedback = modalUtils.createInvalidFeedback(propName);
 
-            const invalidFeedback = this.createElement({
-                tagName: 'div',
-                classNames: [propName, 'invalid-feedback']
-            });
-            invalidFeedback.style.display = 'none';
-            if (validations[propName]) {
-                invalidFeedback.innerText = validations[propName].errorMsg;
+            if (validationRules[propName]) {
+                invalidFeedback.innerText = validationRules[propName].errorMsg;
             }
 
             if (READONLY_FIELDS.includes(propName)) {
@@ -88,23 +56,14 @@ class FighterDetailsModal extends GenericModal {
     };
 
     createSaveBtn() {
-        const saveBtn = this.createElement({
-            tagName: 'button',
-            classNames: ['btn', 'btn-primary'],
-        });
+        const saveBtn = modalUtils.createSaveBtn();
         saveBtn.innerText = 'Save changes';
         saveBtn.addEventListener('click', this.saveBtnHandler);
         return saveBtn;
     }
 
     createCloseBtn(closeBtnHandler) {
-        const closeBtn = this.createElement({
-            tagName: 'button',
-            classNames: ['btn', 'btn-secondary'],
-            attributes: {
-                'data-dismiss': 'exampleModalLabel'
-            }
-        });
+        const closeBtn = modalUtils.createCloseBtn();
         closeBtn.innerText = 'Close';
         closeBtn.addEventListener('click', closeBtnHandler);
         return closeBtn;

@@ -22,7 +22,7 @@ class FighterView extends View {
     }
 
     createName(name) {
-        const nameElement = this.createElement({tagName: 'span', classNames: ['name']});
+        const nameElement = this.createElement({tagName: 'span', classNames: ['fighter_name']});
         nameElement.innerText = name;
 
         return nameElement;
