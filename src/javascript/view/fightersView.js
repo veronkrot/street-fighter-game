@@ -6,6 +6,7 @@ import NavBar from "./navBarView";
 import AddFighterBtn from "./addFighterBtn";
 import {validation} from "../services/validationService";
 import {validationRules} from "../services/validationService";
+import Carousel from './carousel';
 
 const IGNORED_VALIDATION_FIELDS = ['_id', 'source', 'name', 'defense', 'currentHealth'];
 
@@ -24,7 +25,7 @@ class FightersView extends View {
     }
 
     createAddFighterBtn() {
-        return  new AddFighterBtn();
+        return new AddFighterBtn();
     }
 
     createFighters(fighters) {
@@ -33,8 +34,10 @@ class FightersView extends View {
             return fighterView.element;
         });
 
-        this.element = this.createElement({tagName: 'div', classNames: ['fighters']});
-        this.element.append(...fighterElements);
+        const carousel = new Carousel(fighterElements);
+        this.element = carousel.element;
+
+        return this.element;
     }
 
     showFighterDetails(fighter) {
@@ -51,7 +54,7 @@ class FightersView extends View {
             let totalValidations = 0;
             let validProps = 0;
             for (let propName in validationRules) {
-                if(IGNORED_VALIDATION_FIELDS.includes(propName)){
+                if (IGNORED_VALIDATION_FIELDS.includes(propName)) {
                     continue;
                 }
                 totalValidations++;

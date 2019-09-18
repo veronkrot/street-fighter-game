@@ -1,5 +1,6 @@
 import FightersView from './view/fightersView';
 import { fighterService } from './services/fightersService';
+import $ from 'jquery';
 
 class App {
   constructor() {
@@ -25,6 +26,7 @@ class App {
       App.rootElement.innerText = 'Failed to load data';
     } finally {
       App.loadingElement.style.visibility = 'hidden';
+      $('.carousel').carousel('pause');
     }
   }
 }
