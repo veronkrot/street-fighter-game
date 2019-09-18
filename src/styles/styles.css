@@ -22,9 +22,6 @@ body {
     align-items: center;
     flex-wrap: wrap;
     padding: 0 15px;
-    width: 1400px;
-    position: absolute;
-    top: 10%;
 }
 
 .fighter {
@@ -151,3 +148,12 @@ body {
 .valid-feedback {
     margin-top: -0.75rem;
 }
+
+.carousel-control-next {
+    right: -65px;
+}
+
+.carousel-control-prev {
+    left: -95px;
+}
+

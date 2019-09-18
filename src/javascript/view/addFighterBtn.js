@@ -5,6 +5,15 @@ import {validation} from "../services/validationService";
 import {modalUtils} from "./modal/modalUtils";
 
 const IGNORED_VALIDATION_FIELDS = ['_id', 'currentHealth'];
+const  newFighter = {
+    _id: '',
+    name: '',
+    health: '',
+    attack: '',
+    defense: '',
+    source: ''
+
+};
 
 class AddFighterBtn extends View {
     constructor() {
@@ -24,6 +33,7 @@ class AddFighterBtn extends View {
         const saveFunc = (e) => {
             e.preventDefault();
 
+
             const numValidations = ['defense', 'attack', 'health'];
             let totalValidations = 0;
             let validProps = 0;
@@ -38,7 +48,7 @@ class AddFighterBtn extends View {
                     const el = document.querySelector(propValidation.elSelector);
                     const isValidProp = validation.attrNameValidation(el.value, propValidation.minLength, propValidation.maxLength);
                     if (isValidProp) {
-                        noopFighter[propName] = el;
+                        newFighter[propName] = el.value;
                         validProps++;
                     }
                     validation.validationFeedback(isValidProp, propName);
@@ -49,7 +59,7 @@ class AddFighterBtn extends View {
                     const el = document.querySelector(propValidation.elSelector);
                     const isValidProp = validation.attrSourceValidation(el.value);
                     if (isValidProp) {
-                        noopFighter[propName] = el;
+                        newFighter[propName] = el.value;
                         validProps++;
                     }
                     validation.validationFeedback(isValidProp, propName);
@@ -61,17 +71,18 @@ class AddFighterBtn extends View {
                     const elVal = parseInt(el.value);
                     const isValidProp = validation.attrNumValidation(elVal, propValidation.min, propValidation.max);
                     if (isValidProp) {
-                        noopFighter[propName] = elVal;
+                        newFighter[propName] = elVal;
                         validProps++;
                     }
                     validation.validationFeedback(isValidProp, propName);
                 }
             }
             if (totalValidations === validProps) {
+                console.log(newFighter);
                 closeFunc(e);
             }
         };
-
+        localStorage.setItem('myStorage', JSON.stringify(newFighter));
         const modalDialog = new AddFighterModal(noopFighter, saveFunc, closeFunc).element;
         addFighterModal.append(modalDialog);
 
