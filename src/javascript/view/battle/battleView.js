@@ -72,7 +72,7 @@ class BattleView extends View {
                 type: 'button'
             }
         });
-        strikeBtn.innerText = 'Strike!';
+        strikeBtn.innerText = '    Strike!    ';
         fightHolder.fighter1.resetHealth();
         fightHolder.fighter2.resetHealth();
         strikeBtn.addEventListener('click', () => {
@@ -93,10 +93,10 @@ class BattleView extends View {
 
         const exitBattle = () => {
             this.element.remove();
-            const fighters = document.querySelector('.fighters');
+            const fighters = document.querySelector('.carousel');
             fightHolder.fighter1 = undefined;
             fightHolder.fighter2 = undefined;
-            fighters.style.display = 'flex';
+            fighters.style.display = 'block';
         };
 
         secondCol.append(exitBattleBtn, strikeBtn);

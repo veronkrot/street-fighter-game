@@ -14,10 +14,10 @@ export const fight = (fighter1, fighter2) => {
 
         const closeFunc = () => {
             winnerModal.innerHTML = '';
-            const fighters = document.querySelector('.fighters');
+            const fighters = document.querySelector('.carousel');
             fightHolder.fighter1 = undefined;
             fightHolder.fighter2 = undefined;
-            fighters.style.display = 'flex';
+            fighters.style.display = 'block';
         };
 
         const modalDialog = new WinnerModal(fighter, closeFunc).element;

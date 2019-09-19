@@ -21,7 +21,7 @@ class StartFightBtn extends View {
             }
         });
         startFight.innerText = 'Start Fight';
-        const fighters = document.querySelector('.fighters');
+        const fighters = document.querySelector('.carousel');
         startFightWrapper.append(startFight);
         fighters.append(startFightWrapper);
 

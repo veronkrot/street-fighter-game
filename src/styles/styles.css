@@ -61,7 +61,8 @@ body {
 }
 
 .modal {
-    display: block;
+    display: flex;
+    align-items: center;
 }
 
 .selected {
@@ -113,6 +114,7 @@ body {
     position: absolute;
     left: 37%;
     margin-top: -25px;
+    font-size: 14px;
 }
 
 .progress {
@@ -140,10 +142,6 @@ body {
     float: right;
 }
 
-.modal {
-    margin-top: 5%;
-}
-
 .invalid-feedback,
 .valid-feedback {
     margin-top: -0.75rem;
@@ -154,6 +152,5 @@ body {
 }
 
 .carousel-control-prev {
-    left: -95px;
+    left: -90px;
 }
-
