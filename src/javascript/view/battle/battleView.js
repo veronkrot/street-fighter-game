@@ -3,6 +3,7 @@ import {fightHolder} from '../../services/fightHolder'
 import FighterBattleView from "./fighterBattleView";
 import {fight} from "../../services/fight";
 import ProgressBar from "./progressBarView";
+import ExitBattleBtn from "../exitBattleBtn";
 
 class BattleView extends View {
     constructor() {
@@ -10,6 +11,11 @@ class BattleView extends View {
         this.fighter1 = fightHolder.fighter1;
         this.fighter2 = fightHolder.fighter2;
         this.createBattleContainer();
+        this.createExitBattleBtn
+    }
+
+    createExitBattleBtn() {
+        return new ExitBattleBtn();
     }
 
     createBattleContainer() {
@@ -21,8 +27,9 @@ class BattleView extends View {
         const firstColElement = this.createFirstCol();
         const secondColElement = this.createSecondCol();
         const thirdColElement = this.createThirdCol();
+
         document.querySelector('#root').append(this.element);
-        this.element.append(detailsRowElement, fightRowElement, this.secondHealthCol.element);
+        this.element.append(detailsRowElement, fightRowElement);
         detailsRowElement.append(this.firstHealthCol.element, this.secondHealthCol.element);
         fightRowElement.append(firstColElement, secondColElement, thirdColElement);
     }
@@ -59,6 +66,7 @@ class BattleView extends View {
         return firstCol;
     }
 
+
     createSecondCol() {
         const secondCol = this.createElement({
             tagName: 'div',
@@ -72,35 +80,28 @@ class BattleView extends View {
                 type: 'button'
             }
         });
-        strikeBtn.innerText = '    Strike!    ';
+        strikeBtn.innerText = 'Strike!';
+        const fightDetails = this.createElement({
+            tagName: 'div',
+            classNames: ['fight-details']
+        });
         fightHolder.fighter1.resetHealth();
         fightHolder.fighter2.resetHealth();
-        strikeBtn.addEventListener('click', () => {
-           fight(fightHolder.fighter1, fightHolder.fighter2);
-           this.firstHealthCol.update(fightHolder.fighter1);
-           this.secondHealthCol.update(fightHolder.fighter2);
-        });
 
-        const exitBattleBtn = this.createElement({
-            tagName: 'button',
-            classNames: ['btn', 'btn-danger', 'exit-battle-btn'],
-            attributes: {
-                type: 'button'
-            }
-        });
-
-        exitBattleBtn.innerText = 'Exit Battle';
-
-        const exitBattle = () => {
-            this.element.remove();
-            const fighters = document.querySelector('.carousel');
-            fightHolder.fighter1 = undefined;
-            fightHolder.fighter2 = undefined;
-            fighters.style.display = 'block';
+        const createStrikeLogMsg = (fighter, fighterHealth) => {
+            return `${fighter.name}: ${fighterHealth} -> ${fighter.currentHealth}`
         };
 
-        secondCol.append(exitBattleBtn, strikeBtn);
-        exitBattleBtn.addEventListener('click', exitBattle);
+        strikeBtn.addEventListener('click', () => {
+            const fighter1Health = fightHolder.fighter1.currentHealth;
+            const fighter2Health = fightHolder.fighter2.currentHealth;
+            fight(fightHolder.fighter1, fightHolder.fighter2);
+            this.firstHealthCol.update(fightHolder.fighter1);
+            this.secondHealthCol.update(fightHolder.fighter2);
+            fightDetails.innerHTML += `${createStrikeLogMsg(fightHolder.fighter1, fighter1Health)}<br />${createStrikeLogMsg(fightHolder.fighter2, fighter2Health)}<br />`;
+        });
+
+        secondCol.append(strikeBtn, fightDetails);
         return secondCol;
     }
 

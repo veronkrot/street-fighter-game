@@ -3,6 +3,7 @@ import {fightHolder} from "./fightHolder";
 
 const performStrike = (fighter1, fighter2) => {
     fighter1.currentHealth = fighter1.currentHealth - fighter2.getHitPower() - fighter1.getBlockPower();
+    fighter1.currentHealth = fighter1.currentHealth.toFixed(3);
     console.log(fighter1.currentHealth);
 };
 export const fight = (fighter1, fighter2) => {
@@ -18,6 +19,8 @@ export const fight = (fighter1, fighter2) => {
             fightHolder.fighter1 = undefined;
             fightHolder.fighter2 = undefined;
             fighters.style.display = 'block';
+            document.querySelector('.exit-battle-btn').style.display = 'none';
+            document.querySelector('.add-fighter').style.display = 'block';
         };
 
         const modalDialog = new WinnerModal(fighter, closeFunc).element;
@@ -25,16 +28,20 @@ export const fight = (fighter1, fighter2) => {
         return winnerModal;
     };
 
-    if (fighter1.currentHealth <= 0) {
+    const fighter2Won = fighter1.currentHealth <= 0;
+    const fighter1Won = fighter2.currentHealth <= 0;
+
+    if (fighter2Won && fighter1Won) {
+        const winners = [fighter1, fighter2];
+        return showWinner(winners);
+    }
+
+    if (fighter2Won) {
         console.log(`${fighter2.name} won!`);
         return showWinner(fighter2);
     }
-    if (fighter2.currentHealth <= 0) {
+    if (fighter1Won) {
         console.log(`${fighter1.name} won!`);
         return showWinner(fighter1);
-    }
-    if (fighter1.currentHealth <= 0 && fighter2.currentHealth <= 0) {
-        console.log('a draw!');
-
     }
 };
