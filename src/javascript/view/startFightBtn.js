@@ -15,7 +15,7 @@ class StartFightBtn extends View {
         });
         const startFight = this.createElement({
             tagName: 'button',
-            classNames: ['btn', 'btn-success', 'start-fight-btn'],
+            classNames: ['btn', 'btn-danger', 'start-fight-btn'],
             attributes: {
                 type: 'button',
             }
@@ -26,6 +26,9 @@ class StartFightBtn extends View {
         fighters.append(startFightWrapper);
 
         const startBattle = () => {
+            document.querySelector('.add-fighter').style.display = 'none';
+            document.querySelector('.exit-battle-btn').style.display = 'block';
+
             fighters.style.display = 'none';
             document.querySelectorAll('.selected').forEach(el => {
                 el.classList.remove('selected');

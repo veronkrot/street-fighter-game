@@ -36,10 +36,7 @@ class WinnerModal extends GenericModal {
     createCloseBtn() {
         const closeBtn = this.createElement({
             tagName: 'button',
-            classNames: ['btn', 'btn-secondary'],
-            attributes: {
-                'data-dismiss': 'exampleModalLabel'
-            }
+            classNames: ['btn', 'btn-secondary']
         });
         closeBtn.innerText = 'Close';
         closeBtn.addEventListener('click', this.closeBtnHandler);

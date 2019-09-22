@@ -7,6 +7,7 @@ import AddFighterBtn from "./addFighterBtn";
 import {validation} from "../services/validationService";
 import {validationRules} from "../services/validationService";
 import Carousel from './carousel';
+import ExitBattleBtn from "./exitBattleBtn";
 
 const IGNORED_VALIDATION_FIELDS = ['_id', 'source', 'name', 'defense', 'currentHealth'];
 
@@ -18,6 +19,7 @@ class FightersView extends View {
         this.createFighters(fighters);
         this.createNavBar();
         this.createAddFighterBtn();
+        this.createExitBattleBtn();
     }
 
     createNavBar() {
@@ -26,6 +28,12 @@ class FightersView extends View {
 
     createAddFighterBtn() {
         return new AddFighterBtn();
+    }
+
+    createExitBattleBtn() {
+        const exitBattleBtn = new ExitBattleBtn();
+        document.querySelector('.exit-battle-btn').style.display = 'none';
+        return exitBattleBtn;
     }
 
     createFighters(fighters) {
