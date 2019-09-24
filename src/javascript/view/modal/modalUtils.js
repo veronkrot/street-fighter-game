@@ -77,7 +77,6 @@ class ModalUtils extends View {
             tagName: 'button',
             classNames: ['btn', 'btn-secondary'],
             attributes: {
-                'data-dismiss': 'exampleModalLabel'
             }
         });
     }

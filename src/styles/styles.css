@@ -87,7 +87,7 @@ body {
 }
 
 .fighter-image-fight {
-    width: 75%;
+    width: 70%;
     height: 350px;
     align-self: center;
 }
@@ -150,6 +150,10 @@ body {
 
 .carousel-control-prev {
     left: -90px;
+}
+
+.carousel {
+    margin-top: 60px;
 }
 
 .fight-details {
