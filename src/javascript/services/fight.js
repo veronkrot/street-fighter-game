@@ -4,15 +4,14 @@ import {fightHolder} from "./fightHolder";
 const performStrike = (fighter1, fighter2) => {
     fighter1.currentHealth = fighter1.currentHealth - fighter2.getHitPower() - fighter1.getBlockPower();
     fighter1.currentHealth = fighter1.currentHealth.toFixed(3);
-    console.log(fighter1.currentHealth);
 };
+
 export const fight = (fighter1, fighter2) => {
     performStrike(fighter1, fighter2);
     performStrike(fighter2, fighter1);
-    const showWinner = (fighter) => {
+    const showWinner = (fighter, title) => {
         document.querySelector('.container').remove();
         const winnerModal = document.querySelector('#winner-modal');
-
         const closeFunc = () => {
             winnerModal.innerHTML = '';
             const fighters = document.querySelector('.carousel');
@@ -22,8 +21,7 @@ export const fight = (fighter1, fighter2) => {
             document.querySelector('.exit-battle-btn').style.display = 'none';
             document.querySelector('.add-fighter').style.display = 'block';
         };
-
-        const modalDialog = new WinnerModal(fighter, closeFunc).element;
+        const modalDialog = new WinnerModal(fighter, closeFunc, title).element;
         winnerModal.append(modalDialog);
         return winnerModal;
     };
@@ -33,15 +31,18 @@ export const fight = (fighter1, fighter2) => {
 
     if (fighter2Won && fighter1Won) {
         const winners = [fighter1, fighter2];
-        return showWinner(winners);
+        const title = 'A DRAW!';
+        return showWinner(winners, title);
     }
 
     if (fighter2Won) {
-        console.log(`${fighter2.name} won!`);
-        return showWinner(fighter2);
+        const winner = [fighter2];
+        const title = `${fighter2.name} won!`;
+        return showWinner(winner, title);
     }
     if (fighter1Won) {
-        console.log(`${fighter1.name} won!`);
-        return showWinner(fighter1);
+        const winner = [fighter1];
+        const title = `${fighter1.name} won!`;
+        return showWinner(winner, title);
     }
 };
