@@ -1,4 +1,4 @@
-const API_URL = 'https://api.github.com/repos/binary-studio-academy/stage-2-es6-for-everyone/contents/resources/api/';
+const API_URL = 'http://localhost:3000/';
 
 function callApi(endpoint, method) {
   const url = API_URL + endpoint;
