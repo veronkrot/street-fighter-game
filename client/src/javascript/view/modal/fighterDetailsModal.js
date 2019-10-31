@@ -6,14 +6,14 @@ const IGNORED_FIELDS = ['_id', 'source', 'name', 'currentHealth'];
 const READONLY_FIELDS = ['defense'];
 
 class FighterDetailsModal extends GenericModal {
-    constructor(fighter, saveBtnHandler, closeBtnHandler) {
+    constructor(fighter, saveBtnHandler, closeBtnHandler, deleteBtnHandler) {
         super();
         this.fighter = fighter;
         this.saveBtnHandler = saveBtnHandler;
         const buttons = [];
         buttons.push(this.createSaveBtn());
         buttons.push(this.createCloseBtn(closeBtnHandler));
-        super.createDialog(this.modalBody(), fighter.name, buttons, closeBtnHandler);
+        super.createDialog(this.modalBody(), fighter.name, buttons, closeBtnHandler, deleteBtnHandler);
     }
 
     modalBody() {

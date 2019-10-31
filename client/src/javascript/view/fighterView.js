@@ -2,29 +2,45 @@ import View from './view';
 import StartFightBtn from './startFightBtn';
 import {fightHolder} from "../services/fightHolder";
 import {fightersCache} from "../services/fightersCache";
+import DeleteFighterEl from './deleteFighterEl';
 
 class FighterView extends View {
-    constructor(fighter, handleClick) {
+    constructor(fighter, handleClick, handleDeleteEl, handleHideDeleteEl) {
         super();
 
-        this.createFighter(fighter, handleClick);
+        this.createFighter(fighter, handleClick, handleDeleteEl, handleHideDeleteEl);
     }
 
-    createFighter(fighter, handleClick) {
+    createFighter(fighter, handleClick, handleDeleteEl, handleHideDeleteEl) {
         const {name, source} = fighter;
+        const id = fighter._id;
         const nameElement = this.createName(name);
         const imageElement = this.createImage(source);
         const selectBtn = this.createSelectBtn(fighter);
+        const deleteFighterEl = this.createDeleteFighterEl(id);
 
-        this.element = this.createElement({tagName: 'div', classNames: ['fighter']});
-        this.element.append(imageElement, nameElement, selectBtn);
+
+        this.element = this.createElement({
+            tagName: 'div',
+            classNames: ['fighter'],
+            attributes: {
+                id: `fighter-${id}`,
+                'data-id': id
+            }
+        });
+        this.element.append(deleteFighterEl, imageElement, nameElement, selectBtn);
         this.element.addEventListener('click', event => handleClick(event, fighter), false);
+        this.element.addEventListener('mouseover', handleDeleteEl);
+        this.element.addEventListener('mouseout', handleHideDeleteEl);
+    }
+
+    createDeleteFighterEl(id) {
+        return new DeleteFighterEl(id).element;
     }
 
     createName(name) {
         const nameElement = this.createElement({tagName: 'span', classNames: ['fighter_name']});
         nameElement.innerText = name;
-
         return nameElement;
     }
 
@@ -106,7 +122,6 @@ class FighterView extends View {
 
         return selectBtn;
     }
-
 }
 
 export default FighterView;

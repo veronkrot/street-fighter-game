@@ -16,10 +16,24 @@ class FightersView extends View {
         super();
 
         this.handleFighterClick = this.handleFighterClick.bind(this);
+        this.handleDeleteEl = this.handleDeleteEl.bind(this);
+        this.handleHideDeleteEl = this.handleHideDeleteEl.bind(this);
         this.createFighters(fighters);
         this.createNavBar();
         this.createAddFighterBtn();
         this.createExitBattleBtn();
+    }
+
+    handleHideDeleteEl(e) {
+        const id = e.target.getAttribute('data-id')||e.target.parentElement.getAttribute('data-id');
+        const deleteEl = document.querySelector(`.deleteEl[data-id='${id}']`);
+        deleteEl.style.display = 'none';
+    }
+
+    handleDeleteEl(e) {
+        const id = e.target.getAttribute('data-id')||e.target.parentElement.getAttribute('data-id');
+        const deleteEl = document.querySelector(`.deleteEl[data-id='${id}']`);
+        deleteEl.style.display = 'block';
     }
 
     createNavBar() {
@@ -38,7 +52,7 @@ class FightersView extends View {
 
     createFighters(fighters) {
         const fighterElements = fighters.map(fighter => {
-            const fighterView = new FighterView(fighter, this.handleFighterClick);
+            const fighterView = new FighterView(fighter, this.handleFighterClick, this.handleDeleteEl, this.handleHideDeleteEl);
             return fighterView.element;
         });
 
@@ -83,7 +97,6 @@ class FightersView extends View {
 
         const modalDialog = new FighterDetailsModal(fighter, saveFunc, closeFunc).element;
         modal.append(modalDialog);
-
     };
 
     handleFighterClick(event, fighter) {
