@@ -15,7 +15,7 @@ class App {
       App.loadingElement.style.visibility = 'visible';
 
       const fighters = await fighterService.getFighters();
-      const newFighters = [...fighters, ...fighters];
+      const newFighters = [...fighters];
 
       const fightersView = new FightersView(newFighters);
       const fightersElement = fightersView.element;
