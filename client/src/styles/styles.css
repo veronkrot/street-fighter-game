@@ -168,6 +168,12 @@ body {
     border-radius: 5px;
 }
 
-.delete-fighter {
-    width: 50px;
+.deleteEl {
+    padding-bottom: 10px;
+    color: #ffffff;
 }
+
+.deleteEl:active, .deleteEl:hover {
+    color: #ab0f2c;
+}
+
