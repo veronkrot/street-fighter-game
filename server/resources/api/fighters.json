@@ -23,5 +23,15 @@
     "_id": "6",
     "name": "Bison",
     "source": "http://www.fightersgeneration.com/np5/char/ssf2hd/bison-hdstance.gif"
+  },
+  {
+    "_id": "7",
+    "name": "Chun-Li",
+    "source": "http://www.fightersgeneration.com/np5/char/ssf2hd/chunli-hdstance.gif"
+  },
+  {
+    "_id": "8",
+    "name": "Blanka",
+    "source": "http://www.fightersgeneration.com/np5/char/ssf2hd/blanka-hdstance.gif"
   }
 ]
