@@ -3,7 +3,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
 const fightersRouter = require('./routes/fighters');
 const detailsRouter = require('./routes/details');
 
@@ -19,8 +18,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(clientPath));
-app.use('/', indexRouter);
 app.use('/fighters', fightersRouter);
-app.use('/details', detailsRouter);
-
+app.use('/fighter', detailsRouter);
 module.exports = app;
