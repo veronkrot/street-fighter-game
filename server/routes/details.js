@@ -16,14 +16,20 @@ router.get('/:id', function (req, res, next) {
 
 router.delete('/:id', function (req, res, next) {
     const id = req.params.id;
+    let response = {
+        status: 400,
+        message: 'Some Error'
+    };
     if (!id) {
-        res.status(400).send('Some error');
+        res.status(400).send(response);
     }
     const result = deleteFighterById(id);
     if (result) {
-        res.status(200).send("Done");
+        response.status = 200;
+        response.message = 'Done';
+        res.status(200).send(response);
     } else {
-        res.status(400).send('Some error');
+        res.status(400).send(response);
     }
 });
 

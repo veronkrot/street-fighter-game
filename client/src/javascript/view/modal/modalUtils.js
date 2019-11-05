@@ -109,6 +109,34 @@ class ModalUtils extends View {
             }
         });
     }
+
+    createTextWrapper(){
+        return this.createElement({
+            tagName: 'div',
+            classNames: ['delete-modal-text']
+        })
+    }
+
+    closeHeaderElement(){
+        const closeHeaderElement = this.createElement({
+            tagName: 'button',
+            classNames: ['close'],
+            attributes: {
+                type: 'button',
+                'data-dismiss': 'modal',
+                'aria-label': 'Close',
+            }
+        });
+        const ariaHiddenSpan = this.createElement({
+            tagName: 'span',
+            attributes: {
+                'aria-hidden': 'true'
+            }
+        });
+        ariaHiddenSpan.innerHTML = '&times;';
+        closeHeaderElement.append(ariaHiddenSpan);
+        return closeHeaderElement;
+    }
 }
 
 export const modalUtils = new ModalUtils();

@@ -1,4 +1,5 @@
 import View from "../view";
+import {modalUtils} from "./modalUtils";
 
 class GenericModal extends View {
     constructor() {
@@ -78,23 +79,7 @@ class GenericModal extends View {
     }
 
     createCloseHeaderElement(closeBtnHandler) {
-        const closeHeaderElement = this.createElement({
-            tagName: 'button',
-            classNames: ['close'],
-            attributes: {
-                type: 'button',
-                'data-dismiss': 'modal',
-                'aria-label': 'Close'
-            }
-        });
-        const ariaHiddenSpan = this.createElement({
-            tagName: 'span',
-            attributes: {
-                'aria-hidden': 'true'
-            }
-        });
-        ariaHiddenSpan.innerHTML = '&times;';
-        closeHeaderElement.append(ariaHiddenSpan);
+        const closeHeaderElement = modalUtils.closeHeaderElement();
         closeHeaderElement.addEventListener('click', closeBtnHandler);
         return closeHeaderElement;
     }
