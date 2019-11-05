@@ -8,7 +8,9 @@ const createDetailsPath = (id) => {
 };
 
 const getFighters = () => {
-    return require('../resources/api/fighters');
+    const fighters = fs.readFileSync(fightersJsonPath);
+    let fightersArray = JSON.parse(fighters);
+    return fightersArray;
 };
 
 const getFighterById = (id) => {

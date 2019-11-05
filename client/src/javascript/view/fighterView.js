@@ -17,7 +17,7 @@ class FighterView extends View {
         const nameElement = this.createName(name);
         const imageElement = this.createImage(source);
         const selectBtn = this.createSelectBtn(fighter);
-        const deleteFighterEl = this.createDeleteFighterEl(id);
+        const deleteFighterEl = this.createDeleteFighterEl(id, fighter);
 
 
         this.element = this.createElement({
@@ -34,8 +34,8 @@ class FighterView extends View {
         this.element.addEventListener('mouseout', handleHideDeleteEl);
     }
 
-    createDeleteFighterEl(id) {
-        return new DeleteFighterEl(id).element;
+    createDeleteFighterEl(id, fighter) {
+        return new DeleteFighterEl(id, fighter).element;
     }
 
     createName(name) {
