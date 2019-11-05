@@ -12,7 +12,7 @@ class AddFighterModal extends GenericModal {
     constructor(noopFighter, saveBtnHandler, closeBtnHandler) {
         super();
         this.saveBtnHandler = saveBtnHandler;
-        const title = 'Add Fighter';
+        const title = 'Create Fighter';
         const buttons = [];
         buttons.push(this.createSaveBtn());
         buttons.push(this.createCloseBtn(closeBtnHandler));

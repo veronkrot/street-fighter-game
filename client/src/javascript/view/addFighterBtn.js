@@ -1,11 +1,12 @@
 import View from "./view";
-import {validationRules} from "../services/validationService";
+import {validation, validationRules} from "../services/validationService";
 import AddFighterModal from "./modal/addFighterModal";
-import {validation} from "../services/validationService";
 import {modalUtils} from "./modal/modalUtils";
+import {idGenerator} from "../services/idGenerator";
+import {fighterService} from "../services/fightersService";
 
 const IGNORED_VALIDATION_FIELDS = ['_id', 'currentHealth'];
-const  newFighter = {
+const newFighter = {
     _id: '',
     name: '',
     health: '',
@@ -32,7 +33,6 @@ class AddFighterBtn extends View {
 
         const saveFunc = (e) => {
             e.preventDefault();
-
 
             const numValidations = ['defense', 'attack', 'health'];
             let totalValidations = 0;
@@ -79,13 +79,12 @@ class AddFighterBtn extends View {
             }
             if (totalValidations === validProps) {
                 console.log(newFighter);
-                closeFunc(e);
+                fighterService.addFighter(newFighter).then(x => console.log(x));
             }
         };
         localStorage.setItem('myStorage', JSON.stringify(newFighter));
         const modalDialog = new AddFighterModal(noopFighter, saveFunc, closeFunc).element;
         addFighterModal.append(modalDialog);
-
     }
 
     addFighterBtn() {
