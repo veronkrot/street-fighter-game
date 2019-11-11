@@ -1,10 +1,11 @@
 const API_URL = 'http://localhost:3000/';
 
-function callApi(endpoint, method, body) {
+function callApi(endpoint, method, body, headers) {
   const url = API_URL + endpoint;
   const options = {
     method,
-    body
+    body,
+    headers
   };
 
   return fetch(url, options)

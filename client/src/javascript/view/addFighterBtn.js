@@ -2,7 +2,6 @@ import View from "./view";
 import {validation, validationRules} from "../services/validationService";
 import AddFighterModal from "./modal/addFighterModal";
 import {modalUtils} from "./modal/modalUtils";
-import {idGenerator} from "../services/idGenerator";
 import {fighterService} from "../services/fightersService";
 
 const IGNORED_VALIDATION_FIELDS = ['_id', 'currentHealth'];
@@ -81,10 +80,12 @@ class AddFighterBtn extends View {
                 console.log(newFighter);
                 fighterService.addFighter(newFighter).then(x => console.log(x));
             }
+            modal.innerHTML = '';
         };
         localStorage.setItem('myStorage', JSON.stringify(newFighter));
         const modalDialog = new AddFighterModal(noopFighter, saveFunc, closeFunc).element;
         addFighterModal.append(modalDialog);
+
     }
 
     addFighterBtn() {
