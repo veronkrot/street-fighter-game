@@ -31,6 +31,19 @@ class FighterService {
             throw error;
         }
     }
+
+    async addFighter(fighter) {
+        try {
+            const endpoint = `fighter`;
+            const body = JSON.stringify(fighter);
+            const apiResult = await callApi(endpoint, 'POST', body, {
+                'Content-Type': 'application/json'
+            });
+            console.log(apiResult);
+        } catch (error) {
+            throw error;
+        }
+    }
 }
 
 
