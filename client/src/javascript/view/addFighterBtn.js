@@ -1,8 +1,8 @@
 import View from "./view";
 import {validation, validationRules} from "../services/validationService";
 import AddFighterModal from "./modal/addFighterModal";
-import {modalUtils} from "./modal/modalUtils";
 import {fighterService} from "../services/fightersService";
+import {btnUtils} from "./utils/btnUtils";
 
 const IGNORED_VALIDATION_FIELDS = ['_id', 'currentHealth'];
 const newFighter = {
@@ -89,7 +89,7 @@ class AddFighterBtn extends View {
     }
 
     addFighterBtn() {
-        const addFighterBtn = modalUtils.createAddFighterBtn();
+        const addFighterBtn = btnUtils.createAddFighterBtn();
         addFighterBtn.innerText = 'Add Fighter';
         document.querySelector('.navbar').append(addFighterBtn);
         addFighterBtn.addEventListener('click', this.showAddFighterModal);

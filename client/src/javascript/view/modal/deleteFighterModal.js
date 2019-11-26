@@ -1,5 +1,6 @@
 import GenericModal from "./genericModal";
-import {modalUtils} from "./modalUtils";
+import {modalUtils} from "../utils/modalUtils";
+import {btnUtils} from "../utils/btnUtils";
 
 class DeleteFighterModal extends GenericModal {
     constructor(fighter, closeBtnHandler, confirmBtnHandler) {
@@ -7,7 +8,7 @@ class DeleteFighterModal extends GenericModal {
         const buttons = [];
         this.confirmBtnHandler = confirmBtnHandler;
         buttons.push(this.createCloseBtn(closeBtnHandler));
-        buttons.push(this.createConfirmBtn(confirmBtnHandler));
+        buttons.push(this.createConfirmBtn());
         super.createDialog(this.createModalBody(fighter), '', buttons, closeBtnHandler);
     }
 
@@ -20,17 +21,11 @@ class DeleteFighterModal extends GenericModal {
     }
 
     createCloseBtn(closeBtnHandler) {
-        const closeBtn = modalUtils.createCloseBtn();
-        closeBtn.innerText = 'Close';
-        closeBtn.addEventListener('click', closeBtnHandler);
-        return closeBtn;
+        return btnUtils.createCloseBtn(closeBtnHandler, 'Close');
     }
 
     createConfirmBtn() {
-        const confirmBtn = modalUtils.createSaveBtn();
-        confirmBtn.innerText = 'Ok';
-        confirmBtn.addEventListener('click', this.confirmBtnHandler);
-        return confirmBtn;
+        return btnUtils.createSaveBtn(this.confirmBtnHandler, 'OK');
     }
 }
 
