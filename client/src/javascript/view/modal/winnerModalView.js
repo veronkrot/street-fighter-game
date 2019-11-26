@@ -1,5 +1,6 @@
 import GenericModal from "./genericModal";
 import {modalUtils} from "./modalUtils";
+import {btnUtils} from "../utils/btnUtils";
 
 class WinnerModal extends GenericModal {
     constructor(fighter, closeBtnHandler, title) {
@@ -36,10 +37,7 @@ class WinnerModal extends GenericModal {
     }
 
     createCloseBtn() {
-        const closeBtn = modalUtils.createCloseBtn();
-        closeBtn.innerText = 'Close';
-        closeBtn.addEventListener('click', this.closeBtnHandler);
-        return closeBtn;
+        return btnUtils.createCloseBtn(this.closeBtnHandler, 'Close');
     }
 }
 

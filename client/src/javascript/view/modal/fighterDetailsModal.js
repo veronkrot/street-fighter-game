@@ -1,6 +1,7 @@
 import {validationRules} from "../../services/validationService";
 import GenericModal from "./genericModal";
 import {modalUtils} from './modalUtils';
+import {btnUtils} from "../utils/btnUtils";
 
 const IGNORED_FIELDS = ['_id', 'source', 'name', 'currentHealth'];
 const READONLY_FIELDS = ['defense'];
@@ -56,17 +57,11 @@ class FighterDetailsModal extends GenericModal {
     };
 
     createSaveBtn() {
-        const saveBtn = modalUtils.createSaveBtn();
-        saveBtn.innerText = 'Save changes';
-        saveBtn.addEventListener('click', this.saveBtnHandler);
-        return saveBtn;
+        return btnUtils.createSaveBtn(this.saveBtnHandler, 'Save changes');
     }
 
     createCloseBtn(closeBtnHandler) {
-        const closeBtn = modalUtils.createCloseBtn();
-        closeBtn.innerText = 'Close';
-        closeBtn.addEventListener('click', closeBtnHandler);
-        return closeBtn;
+        return btnUtils.createCloseBtn(closeBtnHandler, 'Close');
     }
 
 }

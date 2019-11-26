@@ -1,6 +1,7 @@
 import GenericModal from "./genericModal";
 import Fighter from "../../fighter";
-import {modalUtils} from './modalUtils';
+import {btnUtils} from '../utils/btnUtils'
+import {modalUtils} from "../utils/modalUtils";
 import {validationRules} from "../../services/validationService";
 
 
@@ -52,17 +53,11 @@ class AddFighterModal extends GenericModal {
     }
 
     createSaveBtn() {
-        const saveBtn =  modalUtils.createSaveBtn();
-        saveBtn.innerText = 'Save';
-        saveBtn.addEventListener('click', this.saveBtnHandler);
-        return saveBtn;
+        return btnUtils.createSaveBtn(this.saveBtnHandler, 'Save');
     }
 
     createCloseBtn(closeBtnHandler) {
-        const closeBtn =  modalUtils.createCloseBtn();
-        closeBtn.innerText = 'Close';
-        closeBtn.addEventListener('click', closeBtnHandler);
-        return closeBtn;
+        return btnUtils.createCloseBtn(closeBtnHandler, 'Close');
     }
 }
 
