@@ -1,6 +1,6 @@
 import View from "./view";
 import DeleteFighterModal from "./modal/deleteFighterModal";
-import {modalUtils} from "./modal/modalUtils";
+import {modalUtils} from "./utils/modalUtils";
 import {fighterService} from "../services/fightersService";
 
 class DeleteFighterEl extends View {
