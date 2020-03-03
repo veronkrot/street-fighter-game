@@ -1,5 +1,5 @@
 import GenericModal from "./genericModal";
-import {modalUtils} from "./modalUtils";
+import {modalUtils} from "../utils/modalUtils";
 import {btnUtils} from "../utils/btnUtils";
 
 class WinnerModal extends GenericModal {

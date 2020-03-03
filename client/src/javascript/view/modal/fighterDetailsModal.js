@@ -1,6 +1,6 @@
 import {validationRules} from "../../services/validationService";
 import GenericModal from "./genericModal";
-import {modalUtils} from './modalUtils';
+import {modalUtils} from '../utils/modalUtils';
 import {btnUtils} from "../utils/btnUtils";
 
 const IGNORED_FIELDS = ['_id', 'source', 'name', 'currentHealth'];

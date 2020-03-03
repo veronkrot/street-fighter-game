@@ -1,5 +1,5 @@
 import View from "../view";
-import {modalUtils} from "./modalUtils";
+import {modalUtils} from "../utils/modalUtils";
 
 class GenericModal extends View {
     constructor() {

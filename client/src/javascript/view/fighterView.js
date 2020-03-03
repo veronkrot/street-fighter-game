@@ -3,6 +3,7 @@ import StartFightBtn from './startFightBtn';
 import {fightHolder} from "../services/fightHolder";
 import {fightersCache} from "../services/fightersCache";
 import DeleteFighterEl from './deleteFighterEl';
+import RandomFighterBtn from "./randomFighterBtn";
 
 class FighterView extends View {
     constructor(fighter, handleClick, handleDeleteEl, handleHideDeleteEl) {
@@ -62,9 +63,9 @@ class FighterView extends View {
             }
         });
         selectBtn.innerText = 'Select';
-        const selectFighter = (event) => {
-            event.preventDefault();
-            event.stopPropagation();
+        const selectFighter = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
             let wasUnselected = false;
 
             if (fightHolder.hasFighter1()) {
@@ -107,16 +108,24 @@ class FighterView extends View {
                 }
                 return wasSelected;
             };
-            const wasSelected = selectFighter('fighter1', 'hasFighter1') || selectFighter('fighter2', 'hasFighter2');
+            const wasSelected = selectFighter('fighter1', 'hasFighter1')
+                || selectFighter('fighter2', 'hasFighter2');
 
             if (wasSelected) {
                 selectBtn.classList.add('selected');
             }
 
-            if (fightHolder.hasAllFighters()) {
-                return new StartFightBtn();
+            const selected = document.querySelectorAll('.selected').length;
+            if (selected === 1) {
+                return new RandomFighterBtn();
+            } else if (selected === 0) {
+                document.querySelector('.start-fight-wrapper').remove();
             }
 
+            if (fightHolder.hasAllFighters()) {
+                document.querySelector('.random-fighter-btn').remove();
+                return new StartFightBtn();
+            }
         };
         selectBtn.addEventListener('click', selectFighter);
 
