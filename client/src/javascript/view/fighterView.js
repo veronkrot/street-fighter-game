@@ -3,7 +3,6 @@ import StartFightBtn from './startFightBtn';
 import {fightHolder} from "../services/fightHolder";
 import {fightersCache} from "../services/fightersCache";
 import DeleteFighterEl from './deleteFighterEl';
-import RandomFighterBtn from "./randomFighterBtn";
 
 class FighterView extends View {
     constructor(fighter, handleClick, handleDeleteEl, handleHideDeleteEl) {
@@ -113,13 +112,6 @@ class FighterView extends View {
 
             if (wasSelected) {
                 selectBtn.classList.add('selected');
-            }
-
-            const selected = document.querySelectorAll('.selected').length;
-            if (selected === 1) {
-                return new RandomFighterBtn();
-            } else if (selected === 0) {
-                document.querySelector('.start-fight-wrapper').remove();
             }
 
             if (fightHolder.hasAllFighters()) {

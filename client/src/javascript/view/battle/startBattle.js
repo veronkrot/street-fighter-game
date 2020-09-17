@@ -9,6 +9,5 @@ export const startBattle = () => {
         el.classList.remove('selected');
     });
     document.querySelector('.start-fight-btn').remove();
-    document.querySelector('.random-fighter-btn').remove();
     return new BattleView();
 };
